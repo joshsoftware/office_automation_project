@@ -21,6 +21,8 @@ gem 'sass-rails', '~> 4.0.2'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'bootstrap-sass'
+gem 'aasm' #act_as_state_machine for status in project model
+gem 'cancan'
 
 group :test do
   gem 'rspec-rails'

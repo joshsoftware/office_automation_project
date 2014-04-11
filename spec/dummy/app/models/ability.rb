@@ -1,6 +1,4 @@
-class Ability < OfficeAutomationEmployee::Ability
-  include CanCan::Ability
-
+class Ability < OfficeAutomationProject::Ability
   def initialize(user)
     super
   end
