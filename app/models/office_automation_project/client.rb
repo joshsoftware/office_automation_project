@@ -7,16 +7,21 @@ module OfficeAutomationProject
     field :currency
     field :primary_email_id
     field :secondary_email_id
-    field :phone_no, type: Integer
+    field :phone_no
+    field :address
+    field :city
+    field :state
+    field :country
+    field :pincode, type: Integer
 
     #Validations
-    validates :name, :primary_email_id, presence:true
-    validates :phone_no, {numericality: true, length: {minimum: 10, maximum: 13}}
+    validates :name, :primary_email_id, :phone_no, :address, :city, :state, :country, :pincode, :currency, presence:true
+    validates :primary_email_id, :secondary_email_id, :phone_no, uniqueness: true
+    validates :pincode, numericality: true
+    validates :primary_email_id, :secondary_email_id, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/}
 
     #Relationships
-    embeds_one :client_address, class_name: 'OfficeAutomationEmployee::Address'
-    embeds_many :contactpersons, class_name: 'OfficeAutomationProject::ContactPerson'
-    belongs_to :project, class_name: 'OfficeAutomationProject::Project'
+    has_many :projects, class_name: 'OfficeAutomationProject::Project'
 
   end
 end
