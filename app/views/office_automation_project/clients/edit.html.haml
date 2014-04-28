@@ -5,7 +5,7 @@
     .panel.panel-default
       .panel-heading
         %strong Update client
-      .panel.body
+      .panel-body
         .container-fluid
           = simple_form_for(@client, url: office_automation_project.company_client_path, input_html: { role: :form } ) do |f|
             = render partial: 'office_automation_project/clients/client', locals: {f: f}

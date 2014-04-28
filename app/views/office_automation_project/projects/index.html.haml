@@ -11,7 +11,6 @@
               %table.table.table-hover
                 %thead
                   %tr
-                    %th #
                     %th Name
                     %th Client
                     %th Status
@@ -20,8 +19,7 @@
                 %tbody.rowlink{ "data-link" => "row" }
                   - @projects.each_with_index do |project, index|
                     %tr
-                      %td= link_to (index + 1), office_automation_project.company_project_path(project.company, project)
-                      %td= project.name
+                      %td= link_to project.name, office_automation_project.company_project_path(project.company, project)
                       %td= project.client.name
                       %td= project.status
                       %td= project.codeclimate_url

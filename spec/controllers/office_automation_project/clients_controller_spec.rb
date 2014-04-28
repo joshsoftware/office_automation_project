@@ -76,7 +76,7 @@ module OfficeAutomationProject
       it 'creates new client for company' do
         sign_in admin
         client_count = Client.count
-        post :create, client: {name: "abcd", currency: "rs", primary_email_id: "client@domain.com", secondary_email_id: "client1@domain.com", phone_no: "1234567890", address: "pune", city: "pune", state: "MH", country: "Kazakhstan", pincode: "34567"},  company_id: company.id
+        post :create, client: {name: "abcd", currency: "rs", primary_email_id: "client@domain.com", secondary_email_id: "client1@domain.com", phone_no: "+91 1234565890", address: "pune", city: "pune", state: "MH", country: "Kazakhstan", pincode: "34567"},  company_id: company.id
         expect(Client.count).to eq(client_count+1)
         expect(flash[:success]).to eq("Congratulations!! You have successfully added client")
         sign_out admin
@@ -87,7 +87,7 @@ module OfficeAutomationProject
       it 'will not create new client if validation fails' do
         sign_in admin
         client_count = Client.count
-        post :create, client: {name: "abcd", currency: "rs", primary_email_id: "clientomain.com", secondary_email_id: "client1@domain.com", phone_no: "1234567890", address: "pune", city: "pune", state: "MH", country: "Kazakhstan", pincode: "34567"},  company_id: company.id
+        post :create, client: {name: "abcd", currency: "rs", primary_email_id: "clientomain.com", secondary_email_id: "client1@domain.com", phone_no: "+91 1284567890", address: "pune", city: "pune", state: "MH", country: "Kazakhstan", pincode: "34567"},  company_id: company.id
         expect(Client.count).to eq(client_count)
         expect(flash[:danger]).to eq("Please fill the mandatory fields")
         sign_out admin
@@ -97,7 +97,7 @@ module OfficeAutomationProject
     context '#update' do
       it 'updates existing client details' do
         sign_in admin
-        put :update, client: {name: "new_client", currency: "rs", primary_email_id: "cl@c.com", secondary_email_id: "c1@c.com", phone_no: "1234987891", address: "pune", city: "pune", state: "MH", country: "Kazakhstan", pincode: "34567"}, company_id: company.id, id: client.id
+        put :update, client: {name: "new_client", currency: "rs", primary_email_id: "cl@c.com", secondary_email_id: "c1@c.com", phone_no: "+91 1234987894", address: "pune", city: "pune", state: "MH", country: "Kazakhstan", pincode: "34567"}, company_id: company.id, id: client.id
 
         expect(client.reload.name).to eq("new_client")
         expect(flash[:success]).to eq('Congratulations!! You have successfully updated client')
@@ -107,7 +107,7 @@ module OfficeAutomationProject
       context '#update' do
         it 'will not update existing client details if validation fails' do
           sign_in admin
-          put :update, client: {name: "new_client", currency: "rs", primary_email_id: "clc.com", secondary_email_id: "c1@c.com", phone_no: "1234987891", address: "pune", city: "pune", state: "MH", country: "Kazakhstan", pincode: "34567"}, company_id: company.id, id: client.id
+          put :update, client: {name: "new_client", currency: "rs", primary_email_id: "clc.com", secondary_email_id: "c1@c.com", phone_no: "+91 9234987891", address: "pune", city: "pune", state: "MH", country: "Kazakhstan", pincode: "34567"}, company_id: company.id, id: client.id
 
           expect(flash[:danger]).to eq('Please fill details accordingly')
           sign_out admin

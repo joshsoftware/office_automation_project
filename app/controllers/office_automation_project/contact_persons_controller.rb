@@ -17,5 +17,13 @@ module OfficeAutomationProject
         end
       end
     end
+
+    def show
+      @project = Project.find(params[:project_id])
+      @contact_person = @project.contact_persons.find(params[:id])
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 end

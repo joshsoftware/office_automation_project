@@ -9,35 +9,32 @@
           = render partial: "office_automation_project/projects/project_details", locals: { project: @project }
           - if can?(:edit, @project)
             .well.well-sm
-              %strong= "Client Details"
+              %strong= "Client"
             = render partial: "office_automation_project/projects/client_details", locals:{client: @project.client}
-            .well.well-sm
-              %strong= "Contact Person Details"
+            
             - if @project.contact_persons.count > 0
+              .well.well-sm
+                %strong= "Contact Person"
               %table.table.table-hover 
                 %thead
                   %tr
-                  %th #
                   %th Name
                   %th Primary Email-Id
                   %th Phone Number
                   %th Skype Id
+                  %th More
                 %tbody
                   - @project.contact_persons.each_with_index do |contact_person, index|
                     %tr
-                      %td= index + 1
                       %td= contact_person.name
                       %td= contact_person.primary_email_id
                       %td= contact_person.phone_no
                       %td= contact_person.skype_id
-            - else
-              .form-group
-                %center
-                  %strong Details not added
 
-          .well.well-sm
-            %strong= "Project Member Details"
+                      %td.rowlink-skip= link_to(content_tag(:span, "More", class: "btn btn-primary"), office_automation_project.company_project_contact_person_path(@project.company, @project, contact_person), data: {toggle: "modal"}, remote: true) if can?(:edit,@project)
           - if @project.project_members.count > 0
+            .well.well-sm
+              %strong= "Project Member"
             %table.table.table-hover
               %thead
                 %tr
@@ -52,11 +49,9 @@
                     %td= project_member.user.fullname
                     %td= project_member.user.email
                     %td= (project_member.is_manager ? "YES" : "NO") 
-          - else
-            .form-group
-              %center
-                %strong Details not added
+          - if can?(:edit, @project)
+            %p{ align: :right }
+              = link_to "Edit", office_automation_project.edit_company_project_path(@project.company, @project) ,class: "btn btn-primary" 
 
-                
 
 

@@ -5,7 +5,7 @@
     .panel.panel-default
       .panel-heading
         %strong= "#{@client.name} client's profile"
-      .panel.body
+      .panel-body
         .container-fluid
           .form-group
             = render partial: 'office_automation_project/clients/client_details', locals: {client: @client}

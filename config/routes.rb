@@ -3,7 +3,7 @@ OfficeAutomationProject::Engine.routes.draw do
   resources :companies do
     resources :clients
     resources :projects do
-       resources :contact_persons, only: ['destroy']
+       resources :contact_persons, only: ['destroy', 'show']
     end
   end
 end

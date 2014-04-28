@@ -5,8 +5,10 @@
     .panel.panel-default
       .panel-heading
         %strong Add new client
-      .panel.body
+      .panel-body
         .container-fluid
           = simple_form_for(@client, url: office_automation_project.company_clients_path, input_html: { role: :form } ) do |f|
-            = render partial: 'office_automation_project/clients/client', locals: {f: f}
-            = f.submit "Add new Client", class: "btn btn-primary"
+            .form-group
+              = render partial: 'office_automation_project/clients/client', locals: {f: f}
+            .form-group
+              = f.submit "Add new Client", class: "btn btn-primary"

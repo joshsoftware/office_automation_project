@@ -3,13 +3,12 @@
     .panel.panel-default
       .panel-heading
         %strong Clients
-      .panel.body
+      .panel-body
         .container-fluid
           .col-md-12
             %table.table.table-hover
               %thead
                 %tr
-                  %th #
                   %th Name
                   %th Currency
                   %th Primary Email-Id
@@ -19,8 +18,7 @@
               %tbody.rowlink{ "data-link" => "row" }
                 - @clients.each_with_index do |client, index|
                   %tr
-                    %td= link_to index + 1, office_automation_project.company_client_path(client.company, client)
-                    %td= client.name
+                    %td= client.name,  office_automation_project.company_client_path(client.company, client)
                     %td= client.currency
                     %td= client.primary_email_id
                     %td= client.phone_no

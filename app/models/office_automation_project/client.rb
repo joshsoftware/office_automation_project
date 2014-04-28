@@ -19,6 +19,7 @@ module OfficeAutomationProject
     validates :name, :primary_email_id, :secondary_email_id, :phone_no, uniqueness: {scope: :company}
     validates :pincode, numericality: true
     validates :primary_email_id, :secondary_email_id, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/}
+    validates :phone_no, format: {with: /\+(?:[0-9]??){6,14}[0-9]/}
 
     #Relationships
     has_many :projects, class_name: 'OfficeAutomationProject::Project'

@@ -14,6 +14,7 @@ module OfficeAutomationProject
     #Validation
     validates :name, :start_date, :client_id, presence: true
     validates :name, uniqueness: {scope: :company}
+    validate :end_date_validation
 
     #Relationship
     embeds_many :attachments, class_name: 'OfficeAutomationEmployee::Attachment'
@@ -72,6 +73,10 @@ module OfficeAutomationProject
     end
 
     private
+    def end_date_validation
+      self.errors[:end_date] << "Invalid" if (end_date? and end_date < start_date)
+    end
+
     def has_unique_user
       error_count = 0
       pro_mem=self.project_members.collect(&:user_id)
@@ -87,7 +92,6 @@ module OfficeAutomationProject
       end
       false if (error_count > 0)
     end
-
   end
 
 end

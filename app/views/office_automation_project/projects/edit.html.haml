@@ -5,7 +5,7 @@
     = render 'office_automation_employee/shared/flash'
     .panel.panel-default
       .panel-heading
-        %strong= @project.name + "project's profile"
+        %strong= @project.name + " project's profile"
       .panel-body
         .container-fluid
           = simple_nested_form_for(@project, url: office_automation_project.company_project_path, input_html: { role: :form } ) do |f|
