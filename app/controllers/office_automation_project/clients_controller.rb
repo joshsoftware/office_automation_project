@@ -3,6 +3,8 @@ require_dependency "office_automation_project/application_controller"
 module OfficeAutomationProject
   class ClientsController < ApplicationController
     load_and_authorize_resource
+
+    before_action :load_client, only: [:edit, :show, :update]
     def new
       @client = Client.new
     end
@@ -24,12 +26,9 @@ module OfficeAutomationProject
     end
 
     def edit
-      @client = Client.find(params[:id])
-
     end
 
     def update
-      @client = Client.find(params[:id])
       if @client.update_attributes client_params
         flash[:success] = "Congratulations!! You have successfully updated client"
         redirect_to office_automation_project.edit_company_client_path
@@ -41,8 +40,10 @@ module OfficeAutomationProject
     end
 
     def show
-      @client = Client.find(params[:id])
+    end
 
+    def load_client
+      @client = Client.find[params[:id])
     end
 
     private

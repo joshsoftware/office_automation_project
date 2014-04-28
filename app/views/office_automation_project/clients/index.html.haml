@@ -18,7 +18,7 @@
               %tbody.rowlink{ "data-link" => "row" }
                 - @clients.each_with_index do |client, index|
                   %tr
-                    %td= client.name,  office_automation_project.company_client_path(client.company, client)
+                    %td= link_to client.name, office_automation_project.company_client_path(client.company, client)
                     %td= client.currency
                     %td= client.primary_email_id
                     %td= client.phone_no

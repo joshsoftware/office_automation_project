@@ -7,14 +7,11 @@ module OfficeAutomationProject
       @contact_person = @project.contact_persons.find(params[:id])
       if @contact_person.destroy
         flash[:success] = 'Contact person deleted successfully!!'
-        respond_to do |format|
-          format.js
-        end
       else
         flash[:danger] = 'Unable Delete contact person!!'
-        respond_to do |format|
-          format.js
-        end
+      end
+      respond_to do |format|
+        format.js
       end
     end
 

@@ -3,18 +3,17 @@ require_dependency "office_automation_project/application_controller"
 module OfficeAutomationProject
   class ProjectsController < ApplicationController
 
-    load_and_authorize_resource 
+    load_and_authorize_resource
+    before_action :load_project, only: [:edit, :show, :update]
 
     def index
       @projects = (current_user.role? OfficeAutomationEmployee::Role::ADMIN) ? current_user.company.projects.all : current_user.project_list
     end
 
     def show
-      @project = Project.find(params[:id])
     end
 
     def edit
-      @project = OfficeAutomationProject::Project.find(params[:id])
       @users = current_user.company.users.where(status: 'Active')
       @clients = current_user.company.clients
       @project.contact_persons.build
@@ -54,6 +53,9 @@ module OfficeAutomationProject
       end
     end
 
+    def load_project
+      @project = Project.find(params[:id])
+    end
     private
 
     def project_params
