@@ -1,0 +1,28 @@
+.row
+  .col-md-6
+    .form-group
+      %label Name:
+      = client.name
+      
+  .col-md-6
+    .form-group
+      %label Currency:
+      = client.currency
+.row
+  .col-md-6
+    .form-group
+      %label Primary Email ID:
+      = client.primary_email_id
+  .col-md-6
+    .form-group
+      %label Secondary Email ID:
+      = client.secondary_email_id
+.row
+  .col-md-6
+    .form-group
+      %label Address:
+      = simple_format client.full_address
+  .col-md-6
+    .form-group
+      %label Phone Number:
+      = client.phone_no

@@ -1,0 +1,27 @@
+.row
+  .col-md-6
+    .form-group
+      %label Name:
+      = project.name
+  .col-md-6
+    .form-group
+      %label Start Date:
+      = project.start_date.try(:strftime, '%d-%m-%y')
+.row
+  .col-md-6
+    .form-group
+      %label End Date:
+      = project.end_date ? project.end_date.try(:strftime, '%d-%m-%y') : "Not entered"
+  .col-md-6
+    .form-group
+      %label Description:
+      = project.description ? project.description : "Not entered"
+.row
+  .col-md-6
+    .form-group
+      %label Status:
+      = project.status
+  .col-md-6
+    .form-group
+      %label Codeclimate:
+      = project.codeclimate_url ? project.codeclimate_url : "Not entered"

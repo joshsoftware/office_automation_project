@@ -1,0 +1,12 @@
+.row
+  .col-md-2
+  .col-md-8
+    = render "office_automation_employee/shared/flash"
+    .panel.panel-default
+      .panel-heading
+        %strong Update client
+      .panel-body
+        .container-fluid
+          = simple_form_for(@client, url: office_automation_project.company_client_path, input_html: { role: :form } ) do |f|
+            = render partial: 'office_automation_project/clients/client', locals: {f: f}
+            = f.submit "Update Client", class: "btn btn-primary"

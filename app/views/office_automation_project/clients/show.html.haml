@@ -1,0 +1,13 @@
+.row
+  .col-md-2
+  .col-md-8
+    = render "office_automation_employee/shared/flash"
+    .panel.panel-default
+      .panel-heading
+        %strong= "#{@client.name} client's profile"
+      .panel-body
+        .container-fluid
+          .form-group
+            = render partial: 'office_automation_project/clients/client_details', locals: {client: @client}
+          
+

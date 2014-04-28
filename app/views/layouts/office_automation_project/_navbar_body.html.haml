@@ -1,0 +1,26 @@
+- if signed_in?
+  %ul.nav.navbar-nav
+    - if can? :index, OfficeAutomationProject::Project
+      %li= link_to content_tag(:span, "", class: "glyphicon glyphicon-list-alt") + "  Projects", office_automation_project.company_projects_path(current_user.company)
+
+    - if can? :index, OfficeAutomationProject::Client
+      %li= link_to content_tag(:span, "", class: "glyphicon glyphicon-list-alt") + "  Clients", office_automation_project.company_clients_path(current_user.company)
+    
+      - if can? :create, OfficeAutomationProject::Project
+        %li.dropdown
+          = link_to content_tag(:span, "", class: "glyphicon glyphicon-cog") + " #{current_user.company.name} admin" + content_tag(:b, "", class: "caret"), "#", class: "dropdown-toggle", data: { toggle: "dropdown" }
+
+          %ul.dropdown-menu.pull-right
+            %li= link_to content_tag(:span, "", class: "glyphicon glyphicon-wrench") + " Create Project", office_automation_project.new_company_project_path(current_user.company)
+
+            %li.divider
+            - if can? :create, OfficeAutomationProject::Client
+
+              %li= link_to content_tag(:span, "", class: "glyphicon glyphicon-earphone") + "Add Client", office_automation_project.new_company_client_path(current_user.company)
+
+    %li.dropdown
+      = link_to image_tag(current_user.image.small) + content_tag(:b, "", class: "caret"), "#", class: "data-toggle", data: { toggle: "dropdown" }
+
+      %ul.dropdown-menu.pull-right
+
+        %li= link_to content_tag(:span, "", class: "glyphicon glyphicon-log-out") + " Sign Out", office_automation_employee.destroy_user_session_path, method: :delete
