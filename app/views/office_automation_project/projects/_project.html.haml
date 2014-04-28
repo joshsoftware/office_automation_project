@@ -1,0 +1,44 @@
+.row
+  .col-md-4
+    .form-group
+      = f.input :name, autofocus: true, input_html: { class: "form-control", maxlength: 30, placeholder: "Enter project name here", required: true }
+  .col-md-4
+    .form-group
+      = f.input :status,collection: ["Pending","Active","Deactive", "Completed", "Maintainance", "Close"], input_html: {class: "form-control", value: (f.object.status ? f.object.status : 'pending')}
+  .col-md-4
+    .form-group
+      = f.input :description, as: :text, input_html: {class: "form-control", maxlength: 150, placeholder: "Description"}
+              
+.row
+  .col-md-4
+    %label *Start Date
+    .form-group
+      .customdatepicker.input-group.date
+        = f.input :start_date, label: false, input_html: {class: "form-control", readonly: true,  value: f.object.start_date.try(:strftime, '%d-%m-%Y')}
+        %span.input-group-addon.glyphicon.glyphicon-calendar
+
+  .col-md-4
+    %label End Date
+    .form-group
+      .customdatepicker.input-group.date
+        = f.input :end_date, label: false, input_html: {class: "form-control", readonly: true,  value: f.object.start_date.try(:strftime, '%d-%m-%Y')}
+        %span.input-group-addon.glyphicon.glyphicon-calendar
+
+  .col-md-4
+    .form-group
+      = f.input :codeclimate_url, as: :url, input_html: {class: "form-control", placeholder: "http://codeclimate.com"}
+
+
+  .col-md-4
+    .form-group
+      = f.association :client, collection: current_user.company.clients, input_html: {class: "form-control"}
+
+.form-group
+  .well.well-sm
+    %strong Project Members
+  = render partial: "office_automation_project/projects/project_member", locals: {f: f}
+
+.form-group
+  .well.well-sm
+    %strong Contact Persons
+  = render partial: "office_automation_project/projects/contact_person", locals: {f: f}

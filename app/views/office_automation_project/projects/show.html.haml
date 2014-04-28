@@ -1,0 +1,62 @@
+.row
+  .col-md-2
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        %strong= @project.name
+      .panel-body
+        .container-fluid
+          = render partial: "office_automation_project/projects/project_details", locals: { project: @project }
+          - if can?(:edit, @project)
+            .well.well-sm
+              %strong= "Client Details"
+            = render partial: "office_automation_project/projects/client_details", locals:{client: @project.client}
+            .well.well-sm
+              %strong= "Contact Person Details"
+            - if @project.contact_persons.count > 0
+              %table.table.table-hover 
+                %thead
+                  %tr
+                  %th #
+                  %th Name
+                  %th Primary Email-Id
+                  %th Phone Number
+                  %th Skype Id
+                %tbody
+                  - @project.contact_persons.each_with_index do |contact_person, index|
+                    %tr
+                      %td= index + 1
+                      %td= contact_person.name
+                      %td= contact_person.primary_email_id
+                      %td= contact_person.phone_no
+                      %td= contact_person.skype_id
+            - else
+              .form-group
+                %center
+                  %strong Details not added
+
+          .well.well-sm
+            %strong= "Project Member Details"
+          - if @project.project_members.count > 0
+            %table.table.table-hover
+              %thead
+                %tr
+                %th #
+                %th Name
+                %th Email-Id
+                %th Manager
+              %tbody
+                - @project.project_members.each_with_index do |project_member, index|
+                  %tr
+                    %td= index + 1
+                    %td= project_member.user.fullname
+                    %td= project_member.user.email
+                    %td= (project_member.is_manager ? "YES" : "NO") 
+          - else
+            .form-group
+              %center
+                %strong Details not added
+
+                
+
+

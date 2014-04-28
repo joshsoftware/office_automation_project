@@ -1,0 +1,48 @@
+#new_contact_person
+
+  = f.fields_for :contact_persons do |contact_person|
+    .form-group{id: "#{contact_person.object._id}"}
+      .row
+        .col-md-4
+          .form-group
+            = contact_person.input :name, required: false, label: '* Name', input_html: {class: "form-control", placeholder: 'Enter Name'}
+        .col-md-4
+          .form-group
+            = contact_person.input :primary_email_id, required: false,label: '* Primary Email', input_html: {class: "form-control", placeholder: 'example@domain.com'}
+        .col-md-4
+          .form-group
+            = contact_person.input :secondary_email_id,label: '* Secondary Email', input_html: {class: "form-control", placeholder: 'example@domain.com'}
+      .row
+        .col-md-4
+          .form-group
+            = contact_person.input :phone_no,as: :tel, required: false, label: '* Phone Number',input_html: {class: "form-control", placeholder: '+91 1234567890'}
+        .col-md-4
+          .form-group
+            = contact_person.input :twitter_id, input_html: {class: "form-control", placeholder: 'Enter Twitter Id'}
+        .col-md-4
+          .form-group
+            = contact_person.input :skype_id, input_html: {class: "form-control", placeholder: 'Enter Skype Id'}
+      .row
+        .col-md-4
+          .form-group
+            = contact_person.input :linkedin_id, input_html: {class: "form-control", placeholder: 'Enter Linkedin Id'}
+        .col-md-4
+          .form-group
+            = contact_person.input :address,as: :text, input_html: {class: "form-control", placeholder: 'Enter Address'}
+        .col-md-4
+          %br
+          .form-group
+            - if contact_person.object.new_record?
+              = contact_person.link_to_remove "Remove", class: "btn btn-primary"
+            - else
+              = contact_person.hidden_field :_destroy, value: false
+              = link_to "Delete",company_project_contact_person_path(current_user.company, f.object.id, contact_person.object.id), remote: true, data: {confirm: 'Are you sure?', disable_with: "Deleting.."} , method: :delete,class: "btn btn-danger"
+
+
+
+
+.row
+  .col-md-8
+  .col-md-2
+  = f.link_to_add "Add More", :contact_persons, class: "btn btn-primary", data: { target: "#new_contact_person" }
+

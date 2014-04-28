@@ -8,11 +8,13 @@ require 'rspec/autorun'
 require 'mongoid-rspec'
 require 'rspec/rails'
 require 'database_cleaner'
+require 'rails/mongoid'
 
 ENGINE_RAILS_ROOT = File.join(File.dirname(__FILE__), '../')
 
 Dir[File.join(ENGINE_RAILS_ROOT, "spec/helpers/**/*.rb")].each {|f| require f }
 Dir[File.join(ENGINE_RAILS_ROOT, "spec/factories/**/*.rb")].each {|f| require f }
+Dir[File.join(ENGINE_RAILS_ROOT, "app/decorators/**/*_decorator.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -63,5 +65,8 @@ RSpec.configure do |config|
   Devise::Async.enabled = false
 
   config.include Mongoid::Matchers
+
+  config.include Devise::TestHelpers, type: :controller
+
 
 end

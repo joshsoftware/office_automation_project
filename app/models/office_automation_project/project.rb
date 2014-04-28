@@ -10,10 +10,10 @@ module OfficeAutomationProject
     field :end_date, type: Date
     field :codeclimate_url
     field :status
-    
+
     #Validation
-    validates :name, :start_date, presence: true
-    validates :name, uniqueness: true
+    validates :name, :start_date, :client_id, presence: true
+    validates :name, uniqueness: {scope: :company}
 
     #Relationship
     embeds_many :attachments, class_name: 'OfficeAutomationEmployee::Attachment'
@@ -24,11 +24,15 @@ module OfficeAutomationProject
     belongs_to :client, class_name: 'OfficeAutomationProject::Client'
 
     accepts_nested_attributes_for :project_members
+    accepts_nested_attributes_for :contact_persons
+
+
+    before_save :has_unique_user
 
     # whiny_transition set to false for true/false response instead of exceptions
     # Default field is aasm_state we can specify field using column
     aasm column: 'status', whiny_transitions: false do
-      state :pending, initial: true, before_enter: :send_email #To all admin of company
+      state :pending, initial: true#, before_enter: :send_email To all admin of company
       state :active
       state :deactive
       state :completed
@@ -57,19 +61,33 @@ module OfficeAutomationProject
 
     end
 
-    def send_email
-      puts "New Project has been created"
-    end
-
     def state_change
       puts "State of project has been changed"
       puts "From: #{aasm.from_state} to #{aasm.to_state} "
     end
 
-    #def is_admin
-    #  p "You are not authorised to do this"
-    #  false
-    #end
+
+    def managers
+      self.project_members.where(is_manager: true).all.to_a
+    end
+
+    private
+    def has_unique_user
+      error_count = 0
+      pro_mem=self.project_members.collect(&:user_id)
+      self.project_members.each do |project_member| 
+        count = 0
+        pro_mem.each do |p|
+          count = count+1 if (project_member.user_id).eql?(p)
+        end
+        if count > 1
+          error_count = error_count + 1
+          project_member.errors[:user_id] << "is duplicated on same form"
+        end
+      end
+      false if (error_count > 0)
+    end
+
   end
 
 end

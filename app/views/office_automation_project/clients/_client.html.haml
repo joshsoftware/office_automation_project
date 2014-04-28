@@ -1,0 +1,42 @@
+.row
+  .col-md-4
+    .form-group
+      = f.input :name, autofocus: true, input_html: { class: "form-control", maxlength: 30, placeholder: "Enter client name here", required: true }
+  .col-md-4
+    .form-group
+      = f.input :currency, input_html: {class: "form-control", maxlength: 15, placeholder: "Currency", required: true}
+              
+  .col-md-4
+    .form-group
+      = f.input :primary_email_id, input_html: {class: "form-control", maxlength: 30, placeholder: "Enter primary email id here", required: true}
+.row
+  .col-md-4
+    .form-group
+      = f.input :secondary_email_id, input_html: {class: "form-control", maxlength: 30, placeholder: "Enter secondary email id here"}
+
+  .col-md-4
+    .form-group
+      = f.input :phone_no, input_html: {class: "form-control", maxlength: 30, placeholder: "Enter phone no here"}
+            
+.row
+  .col-md-4
+    .fom-group
+      = f.input :address, input_html: {class: "form-control", maxlength: 30, placeholder: "Enter address"}
+              
+  .col-md-4
+    .form-group
+      = f.input :city, input_html: {class: "form-control", maxlength: 15, placeholder: "Enter city"}
+
+  .col-md-4
+    .form-group
+      = f.input :state, input_html: {class: "form-control", maxlength: 15, placeholder: "Enter state"}
+
+.row
+  .col-md-4
+    .form-group
+      = f.input :country, input_html: {class: "form-control", maxlength: 15, placeholder: "Enter Country"}
+
+  .col-md-4
+    .form-group
+      = f.input :pincode, input_html: {class: "form-control", maxlength: 10, placeholder: "Enter pincode"}
+

@@ -6,4 +6,12 @@
     = stylesheet_link_tag    "office_automation_project/application", media: "all"
     = javascript_include_tag "office_automation_project/application"
     = csrf_meta_tags
+  %body
+    #wrap
+      = render 'layouts/office_automation_project/navbar'
+      .container-fluid
+        = yield
 
+    #footer
+      .container
+        %p= "Currently v" + OfficeAutomationProject::VERSION.to_s + "  ©2014 Josh OfficeAutomation." 
